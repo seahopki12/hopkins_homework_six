@@ -3,7 +3,9 @@
 $("#button-addon2").on("click", function () {
     var searchVal = $("#textArea").val().trim();
     var currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchVal + "&units=imperial&lang=en&appid=5ce031865428d05ef191fd459e73739b";
-    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchVal + "&units=imperial&lang=en&appid=5ce031865428d05ef191fd459e73739b";
+    
+    
+    
 
 
     $.ajax({
@@ -14,8 +16,13 @@ $("#button-addon2").on("click", function () {
         // Creating Search History
         var listItemName = response.name;
         $("#citiesList").append("<li class='list-group-item'>" + listItemName + "</li>");
-        // var searchHistory = $("#cititesList");
-        // localStorage.setItem("search history", searchHistory);
+        var history = document.querySelector("#citiesList").innerHTML;
+        localStorage.setItem("history", history);
+        console.log(localStorage);
+        var historyRefresh = localStorage.getItem("history");
+        history = historyRefresh;
+
+        
 
         // adding current day title
         $("#currentCity").html(response.name + " " + response.dt + "<img id='weatherIcon' src='' alt='weather icon'>");
@@ -63,6 +70,7 @@ $("#button-addon2").on("click", function () {
             $("#humidityFour").text("Humidity: " + response.daily[3].humidity + "%");
             $("#humidityFive").text("Humidity: " + response.daily[4].humidity + "%");
         })
+        
     });
   
 
