@@ -10,6 +10,11 @@ document.querySelector("#titleTwo").innerHTML = sessionStorage.getItem("title tw
 document.querySelector("#titleThree").innerHTML = sessionStorage.getItem("title three");
 document.querySelector("#titleFour").innerHTML = sessionStorage.getItem("title four");
 document.querySelector("#titleFive").innerHTML = sessionStorage.getItem("title five");
+document.querySelector("#firstIcon").src = sessionStorage.getItem("icon one");
+document.querySelector("#secondIcon").src = sessionStorage.getItem("icon two");
+document.querySelector("#thirdIcon").src = sessionStorage.getItem("icon three");
+document.querySelector("#fourthIcon").src = sessionStorage.getItem("icon four");
+document.querySelector("#fifthIcon").src = sessionStorage.getItem("icon five");
 
 $("#button-addon2").on("click", function () {
     var searchVal = $("#textArea").val().trim();
@@ -85,6 +90,11 @@ $("#button-addon2").on("click", function () {
             $("#titleThree").text(response.daily[2].dt);
             $("#titleFour").text(response.daily[3].dt);
             $("#titleFive").text(response.daily[4].dt);
+            $("#firstIcon").attr("src", "http://openweathermap.org/img/w/" + response.daily[0].weather[0].icon + ".png");
+            $("#secondIcon").attr("src", "http://openweathermap.org/img/w/" + response.daily[1].weather[0].icon + ".png");
+            $("#thirdIcon").attr("src", "http://openweathermap.org/img/w/" + response.daily[2].weather[0].icon + ".png");
+            $("#fourthIcon").attr("src", "http://openweathermap.org/img/w/" + response.daily[3].weather[0].icon + ".png");
+            $("#fifthIcon").attr("src", "http://openweathermap.org/img/w/" + response.daily[4].weather[0].icon + ".png");
             $("#tempOne").text("Temp: " + response.daily[0].temp.day + "°F");
             $("#tempTwo").text("Temp: " + response.daily[1].temp.day + "°F");
             $("#tempThree").text("Temp: " + response.daily[2].temp.day + "°F");
@@ -107,6 +117,11 @@ $("#button-addon2").on("click", function () {
             sessionStorage.setItem("title three", document.querySelector("#titleThree").innerHTML);
             sessionStorage.setItem("title four", document.querySelector("#titleFour").innerHTML);
             sessionStorage.setItem("title five", document.querySelector("#titleFive").innerHTML);
+            sessionStorage.setItem("icon one", document.querySelector("#firstIcon").src);
+            sessionStorage.setItem("icon two", document.querySelector("#secondIcon").src);
+            sessionStorage.setItem("icon three", document.querySelector("#thirdIcon").src);
+            sessionStorage.setItem("icon four", document.querySelector("#fourthIcon").src);
+            sessionStorage.setItem("icon five", document.querySelector("#fifthIcon").src);
 
 
 
