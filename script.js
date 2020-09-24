@@ -2,9 +2,9 @@
 document.querySelector("#citiesList").innerHTML = sessionStorage.getItem("history");
 document.querySelector("#currentCity").innerHTML = sessionStorage.getItem("current city");
 document.querySelector("#currentTemp").innerHTML = sessionStorage.getItem("current temp");
-document.querySelector("#currentWind").innerHTML = sessionStorage.getItem("current humidity");
-document.querySelector("#currentHumidity").innerHTML = sessionStorage.getItem("current wind");
-document.querySelector("#currentUV").innerHTML = sessionStorage.getItem("current UV");
+document.querySelector("#currentHumidity").innerHTML = sessionStorage.getItem("current humidity");
+document.querySelector("#currentWind").innerHTML = sessionStorage.getItem("current wind");
+document.querySelector("#currentUV").innerHTML = sessionStorage.getItem("current uv");
 document.querySelector("#titleOne").innerHTML = sessionStorage.getItem("title one");
 document.querySelector("#titleTwo").innerHTML = sessionStorage.getItem("title two");
 document.querySelector("#titleThree").innerHTML = sessionStorage.getItem("title three");
@@ -15,6 +15,16 @@ document.querySelector("#secondIcon").src = sessionStorage.getItem("icon two");
 document.querySelector("#thirdIcon").src = sessionStorage.getItem("icon three");
 document.querySelector("#fourthIcon").src = sessionStorage.getItem("icon four");
 document.querySelector("#fifthIcon").src = sessionStorage.getItem("icon five");
+document.querySelector("#tempOne").innerHTML = sessionStorage.getItem("temp one");
+document.querySelector("#tempTwo").innerHTML = sessionStorage.getItem("temp two");
+document.querySelector("#tempThree").innerHTML = sessionStorage.getItem("temp three");
+document.querySelector("#tempFour").innerHTML = sessionStorage.getItem("temp four");
+document.querySelector("#tempFive").innerHTML = sessionStorage.getItem("temp five");
+document.querySelector("#humidityOne").innerHTML = sessionStorage.getItem("humidity one");
+document.querySelector("#humidityTwo").innerHTML = sessionStorage.getItem("humidity two");
+document.querySelector("#humidityThree").innerHTML = sessionStorage.getItem("humidity three");
+document.querySelector("#humidityFour").innerHTML = sessionStorage.getItem("humidity four");
+document.querySelector("#humidityFive").innerHTML = sessionStorage.getItem("humidity five");
 
 $("#button-addon2").on("click", function () {
     var searchVal = $("#textArea").val().trim();
@@ -33,11 +43,6 @@ $("#button-addon2").on("click", function () {
         $("#citiesList").append("<li class='list-group-item'>" + listItemName + "</li>");
         var history = document.querySelector("#citiesList");
         sessionStorage.setItem("history", history.innerHTML);
-        
-
-
-
-
 
         // adding current day title
         $("#currentCity").html(response.name + " " + response.dt + "<img id='weatherIcon' src='' alt='weather icon'>");
@@ -55,12 +60,12 @@ $("#button-addon2").on("click", function () {
         var currentTemp = document.querySelector("#currentTemp");
         var currentHumidity = document.querySelector("#currentHumidity");
         var currentWind = document.querySelector("#currentWind");
-        var currentUV = document.querySelector("#currentUV");
+
         sessionStorage.setItem("current city", currentCity.innerHTML);
         sessionStorage.setItem("current temp", currentTemp.innerHTML);
         sessionStorage.setItem("current humidity", currentHumidity.innerHTML);
         sessionStorage.setItem("current wind", currentWind.innerHTML);
-        sessionStorage.setItem("current uv", currentUV.innerHTML);
+
         console.log(sessionStorage);
 
         // declaring variables for second API call
@@ -74,11 +79,15 @@ $("#button-addon2").on("click", function () {
         }).then(function (response) {
             console.log(response);
 
-            // UV Index Color Coordination
+            // UV Index Info
             $("#currentUV").html("UV Index: " + "<span id='index'>" + response.current.uvi + "</span>");
-            if (Math.round(response.current.uvi) <= 5) {
+            var currentUV = document.querySelector("#currentUV");
+            sessionStorage.setItem("current uv", currentUV.innerHTML);
+
+            // UV Index Color Coordination
+            if (response.current.uvi <= 5) {
                 $("#index").css("background color", "green")
-            } else if (Math.round(response.current.uvi) > 5 && response.current.uvi <= 10) {
+            } else if (response.current.uvi > 5 && response.current.uvi <= 10) {
                 $("#index").css("background color", "yellow")
             } else {
                 $("#index").css("background color", "red");
@@ -106,12 +115,8 @@ $("#button-addon2").on("click", function () {
             $("#humidityFour").text("Humidity: " + response.daily[3].humidity + "%");
             $("#humidityFive").text("Humidity: " + response.daily[4].humidity + "%");
 
+
             // storing forecast data to local storage
-            // var titleOne = document.querySelector("#titleOne");
-            // var titleTwo = document.querySelector("#titleTwo");
-            // var titleThree = document.querySelector("#titleThree");
-            // var titleFour = document.querySelector("#titleFour");
-            // var titleFive = document.querySelector("#titleFive");
             sessionStorage.setItem("title one", document.querySelector("#titleOne").innerHTML);
             sessionStorage.setItem("title two", document.querySelector("#titleTwo").innerHTML);
             sessionStorage.setItem("title three", document.querySelector("#titleThree").innerHTML);
@@ -122,13 +127,17 @@ $("#button-addon2").on("click", function () {
             sessionStorage.setItem("icon three", document.querySelector("#thirdIcon").src);
             sessionStorage.setItem("icon four", document.querySelector("#fourthIcon").src);
             sessionStorage.setItem("icon five", document.querySelector("#fifthIcon").src);
-
-
-
+            sessionStorage.setItem("temp one", document.querySelector("#tempOne").innerHTML);
+            sessionStorage.setItem("temp two", document.querySelector("#tempTwo").innerHTML);
+            sessionStorage.setItem("temp three", document.querySelector("#tempThree").innerHTML);
+            sessionStorage.setItem("temp four", document.querySelector("#tempFour").innerHTML);
+            sessionStorage.setItem("temp five", document.querySelector("#tempFive").innerHTML);
+            sessionStorage.setItem("humidity one", document.querySelector("#humidityOne").innerHTML);
+            sessionStorage.setItem("humidity two", document.querySelector("#humidityTwo").innerHTML);
+            sessionStorage.setItem("humidity three", document.querySelector("#humidityThree").innerHTML);
+            sessionStorage.setItem("humidity four", document.querySelector("#humidityFour").innerHTML);
+            sessionStorage.setItem("humidity five", document.querySelector("#humidityFive").innerHTML);
         })
-
     });
-
-
-
 });
+
