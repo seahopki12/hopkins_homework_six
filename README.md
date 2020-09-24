@@ -1,4 +1,4 @@
-# hopkins_homework_six
+# hopkins_weather_dashboard
 
 This website is designed to show current and future weather forecasts for user-selected locations.
 
